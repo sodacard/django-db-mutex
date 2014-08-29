@@ -70,7 +70,7 @@ class db_mutex(object):
         :rtype: int
         :returns: the mutex's ttl in seconds
         """
-        thiry_mins = self.imedelta_total_seconds(timedelta(minutes=30))
+        thiry_mins = self.timedelta_total_seconds(timedelta(minutes=30))
         return getattr(settings, self.mutex_ttl_seconds_settings_key, thiry_mins)
 
     def delete_expired_locks(self):
