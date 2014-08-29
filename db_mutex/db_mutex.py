@@ -98,7 +98,7 @@ class db_mutex(object):
         # Delete any expired locks first
         self.delete_expired_locks()
         try:
-            with transaction.atomic():
+            with transaction.commit_on_success():
                 self.lock = DBMutex.objects.create(lock_id=self.lock_id)
         except IntegrityError:
             raise DBMutexError('Could not acquire lock: {0}'.format(self.lock_id))
