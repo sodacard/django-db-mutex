@@ -59,6 +59,9 @@ class db_mutex(object):
         self.lock_id = lock_id
         self.lock = None
 
+    def timedelta_total_seconds(self, td):
+        return (td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6
+
     def get_mutex_ttl_seconds(self):
         """
         Returns a TTL for mutex locks. It defaults to 30 minutes. If the user specifies None
@@ -67,7 +70,8 @@ class db_mutex(object):
         :rtype: int
         :returns: the mutex's ttl in seconds
         """
-        return getattr(settings, self.mutex_ttl_seconds_settings_key, timedelta(minutes=30).total_seconds())
+        thiry_mins = timedelta_total_seconds(timedelta(minutes=30))
+        return getattr(settings, self.mutex_ttl_seconds_settings_key, thiry_mins)
 
     def delete_expired_locks(self):
         """
