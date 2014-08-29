@@ -11,7 +11,7 @@ class Migration(SchemaMigration):
         # Adding model 'DBMutex'
         db.create_table(u'db_mutex_dbmutex', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('lock_id', self.gf('django.db.models.fields.CharField')(unique=True, max_length=256)),
+            ('lock_id', self.gf('django.db.models.fields.CharField')(unique=True, max_length=255)),
             ('creation_time', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
         db.send_create_signal(u'db_mutex', ['DBMutex'])
@@ -27,7 +27,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'DBMutex'},
             'creation_time': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'lock_id': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '256'})
+            'lock_id': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'})
         }
     }
 
